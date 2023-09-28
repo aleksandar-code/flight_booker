@@ -18,7 +18,7 @@
 
   <div>
     <%= form.label :flight_date, style: "display: block" %>
-    <%= form.text_field :flight_date %>
+    <%= form.select :flight_date, @flights.map { |a| [Date.parse(a.start_datetime).strftime("%a %e %b %Y %H:%M"), a.id]} %>
   </div>
 
   <div>
