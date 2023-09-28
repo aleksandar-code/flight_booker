@@ -23,7 +23,11 @@ Each program or function should have the following information:
 
 ## Documentation
 
-- App goal: 
-- App input: 
-- App output:
+- App goal: Book flights for passengers, departing from an airport arriving at another airport.
+            Passengers should be able to search for a flight using 4 dropdown menus that will
+            allow users to search for available flights - departure airport, arrival airport,
+            date, and number of passengers. The app should return available flights in o form.
+- App input: The user queries for flights, then chooses a flight from available flights.
+- App output: Once the form is successfully submitted, render the booking’s #show page
+            which displays the booking information (flight and passenger information).
 - App steps: 
