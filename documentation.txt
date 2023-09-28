@@ -30,4 +30,27 @@ Each program or function should have the following information:
 - App input: The user queries for flights, then chooses a flight from available flights.
 - App output: Once the form is successfully submitted, render the booking’s #show page
             which displays the booking information (flight and passenger information).
-- App steps: 
+- App steps: Create airport model with airport code and fill it's database. Create a flight model
+            with the departure and arrival airport ids, start datetime and flight duration.
+            Set up associations so you can ask Flight.first.departure_airport, Flight.first.arrival_airport
+            and get back Airport objects. Same for Airport.first.departing_flights and
+            Airport.first.arriving_flights, which should return a list of Flight objects. Fill database.
+            Create your search form on the /flights index page to submit using a GET (not POST) request back to the same URL.
+            The date dropdown should only include dates that have existing flights. 
+            Do querying and send back the data to the user in separate form with passenger number hidden.
+            Create and migrate the Booking model.
+            Create and migrate the Passenger model (just keep the information simple – name and email only).
+            Set up associations between Bookings, Passengers, and Flights.
+            Create a BookingsController and appropriate routes.
+
+            Set up your #new action, which should have received the flight ID and passenger number parameters,
+            and use it to help render a form for a new booking which displays the currently chosen date, airports,
+            flight ID and a set of fields to enter personal information for each passenger. You’ll want to create
+            a new blank Passenger object in your controller for each passenger, and then use #fields_for in the
+            view to set up the sub-forms. Try submitting the form and check out the parameters in your server.
+            You’ll need your #create action to create a new Booking (linking it to the appropriate Flight)
+            but it will also need to accept the nested attributes for each of the Passenger objects and create
+            a new Passenger from them. Be mindful of allowing the nested parameters as well.
+            Go to the Booking model and implement the #accepts_nested_attributes_for method. See the Rails API\
+            for examples and this SO post for another. Once your form is successfully submitted, render the booking’s
+            #show page which displays the booking information (flight and passenger information).
