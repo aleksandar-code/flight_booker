@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
 
 Airport.destroy_all
 
@@ -19,14 +12,41 @@ Airport.create!([{
 },
 {
   code: "TX",
-},
-{
-  code: "UTA",
-},
-{
-  code: "CGA",
-},
-{
-  code: "MLA",
-},
+}
+])
+
+Airport.first.departing_flights.create!([
+  {
+    departing_flight: Airport.find_by(code: "NYC"),
+    arriving_flight: Airport.find_by(code: "SFO"),
+    start_datetime: "Sun, 01 Jan 2012 00:00:00 +0300",
+    flight_time: "1:20",
+  }
+])
+
+Airport.last.departing_flights.create!([
+  {
+    departing_flight: Airport.find_by(code: "TX"),
+    arriving_flight: Airport.find_by(code: "LA"),
+    start_datetime: "Sun, 01 Jan 2012 00:00:00 +0300",
+    flight_time: "1:20",
+  }
+])
+
+Airport.second.departing_flights.create!([
+  {
+    departing_flight: Airport.find_by(code: "SFO"),
+    arriving_flight: Airport.find_by(code: "TX"),
+    start_datetime: "Sun, 01 Jan 2012 00:00:00 +0300",
+    flight_time: "1:20",
+  }
+])
+
+Airport.third.departing_flights.create!([
+  {
+    departing_flight: Airport.find_by(code: "LA"),
+    arriving_flight: Airport.find_by(code: "NYC"),
+    start_datetime: "Sun, 01 Jan 2012 00:00:00 +0300",
+    flight_time: "1:20",
+  }
 ])

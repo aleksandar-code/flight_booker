@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+
+<%= form_with(scope: "booking") do |form| %>
+  <div>
+    <%= form.label :departure_airport, style: "display: block" %>
+    <%= form.select :departure_airport, @airports.map { |a| [a.code, a.id]} %>
+  </div>
+
+  <div>
+    <%= form.label :arrival_airport, style: "display: block" %>
+    <%= form.select :arrival_airport, @airports.map { |a| [a.code, a.id]} %>
+  </div>
+
+  <div>
+    <%= form.label :passenger_number, style: "display: block" %>
+    <%= form.number_field :passenger_number, in: 1.0..100.0, value: 1 %>
+  </div>
+
+  <div>
+    <%= form.label :flight_date, style: "display: block" %>
+    <%= form.text_field :flight_date %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
