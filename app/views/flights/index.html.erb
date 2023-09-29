@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<%= form_with(scope: "booking") do |form| %>
+<%= form_with url: "/search", method: :get do |form| %>
   <div>
     <%= form.label :departure_airport, style: "display: block" %>
     <%= form.select :departure_airport, @airports.map { |a| [a.code, a.id]} %>
@@ -12,17 +12,21 @@
   </div>
 
   <div>
-    <%= form.label :passenger_number, style: "display: block" %>
-    <%= form.number_field :passenger_number, in: 1.0..100.0, value: 1 %>
+    <%= form.label :tickets, style: "display: block" %>
+    <%= form.number_field :tickets, in: 1.0..100.0, value: 1 %>
   </div>
 
   <div>
     <%= form.label :flight_date, style: "display: block" %>
-    <%= form.select :flight_date, @flights.map { |a| [Date.parse(a.start_datetime).strftime("%a %e %b %Y %H:%M"), a.id]} %>
+    <%= form.select :flight_date, @flights.map { |a| [a.start_datetime, 
+    a.start_datetime]} %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Search" %>
   </div>
 <% end %>
 
+<div> 
+ <%= @result.inspect %>
+</div>
