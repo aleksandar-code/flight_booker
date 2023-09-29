@@ -30,24 +30,24 @@
 <div> 
 <% unless @result.nil? %>
   <%= form_with url: "/bookings/new", method: :get  do |form| %>
-    <% @result.each_with_index do |a, index| %>
-          <%= form.label :departure_airport, style: "display: block" %>
-          <%= @airports.find(a.departure_airport).code %>
-            <%= form.label :arrival_airport, style: "display: block" %>
-            <%= @airports.find(a.arrival_airport).code %>
-            <%= form.label :start_datetime, style: "display: block" %>
-            <%= a.start_datetime %>
-            <%= form.label :flight_time, style: "display: block" %>
-            <%= a.flight_time %>
-            <%= radio_button("airport","flight","date") %>
-            <%= form.number_field :tickets, style: "display: block", value: @tickets, type: :hidden %>
-            <%= form.number_field :index, style: "display: block", value: index, type: :hidden %>
+    <% @result.each do |a| %>
+      <%= form.label :departure_airport, style: "display: block" %>
+      <%= form.text_field :departure_airport, style: "display: block", value: @airports.find(a.departure_airport).code, readonly: true %>
+      <%= form.label :arrival_airport, style: "display: block" %>
+      <%= form.text_field :arrival_airport, style: "display: block", value: @airports.find(a.arrival_airport).code, readonly: true %>
+      <%= form.label :start_datetime, style: "display: block" %>
+      <%= form.text_field :start_datetime, style: "display: block", value: a.start_datetime, readonly: true %>
+      <%= form.label :flight_time, style: "display: block" %>
+      <%= form.text_field :flight_time, style: "display: block", value: a.flight_time, readonly: true %>
 
-          <br>
-          <br>
+      <%= radio_button("airport","flight","date") %>
+      <%= form.number_field :tickets, style: "display: block", value: @tickets, type: :hidden %>
+      <%= form.number_field :flight_id, style: "display: block", value: @airports.find(a.departure_airport).departing_flights.find(a.id).id, type: :hidden %>
+            
+      <br>
+      <br>
     <% end %>
   <%= form.submit "Book" %>
   <% end %>
-  <% @result = nil %>
 <% end%>
 </div>

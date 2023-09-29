@@ -11,7 +11,19 @@
     </div>
   <% end %>
 
-  <div>
+  <div>  
+    <%= form.label :departure_airport, style: "display: block" %>
+    <%= form.text_field :departure_airport, style: "display: block", value: params[:departure_airport], readonly: true %>
+    <%= form.label :arrival_airport, style: "display: block" %>
+    <%= form.text_field :arrival_airport, style: "display: block", value: params[:arrival_airport], readonly: true %>
+    <%= form.label :start_datetime, style: "display: block" %>
+    <%= form.text_field :start_datetime, style: "display: block", value: params[:start_datetime], readonly: true %>
+    <%= form.label :flight_time, style: "display: block" %>
+    <%= form.text_field :flight_time, style: "display: block", value: params[:flight_time], readonly: true %>
+    <%= form.label :flight_id, style: "display: block" %>
+    <%= form.text_field :flight_id, style: "display: block", value: params[:flight_id], readonly: true %>
+    <br>
+    <br>
     <%= form.submit %>
   </div>
 <% end %>
