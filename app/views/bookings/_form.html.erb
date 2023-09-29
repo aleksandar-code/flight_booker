@@ -25,13 +25,15 @@
     <%= form.number_field :tickets, style: "display: block", value: params[:tickets], type: :hidden %>
 
     <br>
-    <% @passengers.each_with_index do |passenger, index| %>
-      <%= form.fields_for :passengers, passenger do |fp| %>  
-        <p>Passenger <%= index + 1 %></p>
-        <%= fp.label :name %>
-        <%= fp.text_field :name %>
-        <%= fp.label :email %>
-        <%= fp.text_field :email %>
+    <% @passengers.each_with_index do |passenger, index|%>
+      <%= form.fields_for :passengers, passenger  do |passenger_form| %>
+        <h4>Passenger <%= index + 1 %></h4>
+
+        <%= passenger_form.label :name, "Full name:" %>
+        <%= passenger_form.text_field :name %>
+
+        <%= passenger_form.label :email, "Email:" %>
+        <%= passenger_form.email_field :email %>
       <% end %>
     <% end %>
     <br>
