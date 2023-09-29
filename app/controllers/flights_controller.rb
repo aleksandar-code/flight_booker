@@ -12,6 +12,7 @@ class FlightsController < ApplicationController
       @result = Flight.where("start_datetime LIKE ?", key)
       @result = @result.where("departure_airport LIKE ?", key2)
       @result = @result.where("arrival_airport LIKE ?", key3)
+      @tickets = params[:tickets]
       @result = nil if @result.blank?
     end
   end
