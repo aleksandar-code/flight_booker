@@ -5,14 +5,15 @@ class FlightsController < ApplicationController
   def index
     @flights = Flight.all
     @airports = Airport.all
-
-    key = "%#{params[:flight_date]}%"
-    key2 = "%#{params[:departure_airport]}%"
-    key3 = "%#{params[:arrival_airport]}%"
-    @result = Flight.where("start_datetime LIKE ?", key)
-    @result = @result.where("departure_airport LIKE ?", key2)
-    @result = @result.where("arrival_airport LIKE ?", key3)
-
+    if params[:commit] == "Search" 
+      key = "%#{params[:flight_date]}%"
+      key2 = "%#{params[:departure_airport]}%"
+      key3 = "%#{params[:arrival_airport]}%"
+      @result = Flight.where("start_datetime LIKE ?", key)
+      @result = @result.where("departure_airport LIKE ?", key2)
+      @result = @result.where("arrival_airport LIKE ?", key3)
+      @result = nil if @result.blank?
+    end
   end
 
   # GET /flights/1 or /flights/1.json

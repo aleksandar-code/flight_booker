@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :tickets, style: "display: block" %>
-    <%= form.number_field :tickets, in: 1.0..100.0, value: 1 %>
+    <%= form.number_field :tickets, in: 1.0..4.0, value: 1 %>
   </div>
 
   <div>
@@ -28,5 +28,21 @@
 <% end %>
 
 <div> 
- <%= @result.inspect %>
+<% unless @result.nil? %>
+  <%= form_with  do |form| %>
+    <% @result.each do |a| %>
+          <%= form.label :departure_airport, style: "display: block" %>
+            <td><%= @airports.find(a.departure_airport).code %></td>
+            <%= form.label :arrival_airport, style: "display: block" %>
+            <td><%= @airports.find(a.arrival_airport).code %></td>
+            <%= form.label :start_datetime, style: "display: block" %>
+            <td><%= a.start_datetime %></td>
+            <%= form.label :flight_time, style: "display: block" %>
+            <td><%= a.flight_time %></td>
+          <br>
+          <br>
+    <% end %>
+  <% end %>
+  <% @result = nil %>
+<% end%>
 </div>
