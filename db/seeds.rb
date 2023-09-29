@@ -37,7 +37,7 @@ Airport.second.departing_flights.create!([
   {
     departing_flight: Airport.find_by(code: "SFO"),
     arriving_flight: Airport.find_by(code: "TX"),
-    start_datetime: "Wed 20 Sep 2023 01:30",
+    start_datetime: "Mon 25 Sep 2023 01:30",
     flight_time: "1:00",
   }
 ])
