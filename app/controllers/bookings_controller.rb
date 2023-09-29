@@ -13,6 +13,13 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
+    @passengers = []
+    if params[:tickets].to_i > 1
+      params[:tickets].to_i.times do 
+        @passengers.push(Passenger.new)
+      end
+    end
+    
   end
 
   # GET /bookings/1/edit
@@ -65,7 +72,6 @@ class BookingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def booking_params
-      params.require(:booking).permit(:tickets, :flight_id)
-
+      params.require(:booking).permit(:tickets, :flight_id, :name, :email, :flight_time)
     end
 end

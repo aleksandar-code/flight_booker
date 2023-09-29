@@ -22,7 +22,18 @@
     <%= form.text_field :flight_time, style: "display: block", value: params[:flight_time], readonly: true %>
     <%= form.label :flight_id, style: "display: block" %>
     <%= form.text_field :flight_id, style: "display: block", value: params[:flight_id], readonly: true %>
+    <%= form.number_field :tickets, style: "display: block", value: params[:tickets], type: :hidden %>
+
     <br>
+    <% @passengers.each_with_index do |passenger, index| %>
+      <%= form.fields_for :passengers, passenger do |fp| %>  
+        <p>Passenger <%= index + 1 %></p>
+        <%= fp.label :name %>
+        <%= fp.text_field :name %>
+        <%= fp.label :email %>
+        <%= fp.text_field :email %>
+      <% end %>
+    <% end %>
     <br>
     <%= form.submit %>
   </div>
