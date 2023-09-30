@@ -3,6 +3,23 @@
 <%= render @booking %>
 
 <div>
+
+  <p>Departure airport: <%= @departure_airport.code %></p>
+  <p>Arrival airport: <%= @arrival_airport.code %></p>
+  <p>Start datetime: <%= @flight.start_datetime %></p>
+  <p>Flight time: <%= @flight.flight_time %></p>
+  <p>Flight ID: <%= @flight.id %></p>
+  <p>Airport ID: <%= @departure_airport.id %></p>
+  <p>-------------------------------------------------------</p>
+  <% @booking.passengers.each do |passenger| %>
+    <p>Passenger <%= passenger.id %></p>
+    <p>Name: <%= passenger.name %></p>
+    <p>Email: <%= passenger.email %></p>
+  <%end%>
+  <p>Booking ID: <%= @booking.id %></p>
+ <p>-------------------------------------------------------</p>
+  <br>
+
   <%= link_to "Edit this booking", edit_booking_path(@booking) %> |
   <%= link_to "Back to bookings", bookings_path %>
 

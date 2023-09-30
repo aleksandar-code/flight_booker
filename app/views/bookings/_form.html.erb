@@ -1,42 +1,32 @@
-<%= form_with(model: booking) do |form| %>
-  <% if booking.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
 
-      <ul>
-        <% booking.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div>  
-    <%= form.label :departure_airport, style: "display: block" %>
-    <%= form.text_field :departure_airport, style: "display: block", value: params[:departure_airport], readonly: true %>
-    <%= form.label :arrival_airport, style: "display: block" %>
-    <%= form.text_field :arrival_airport, style: "display: block", value: params[:arrival_airport], readonly: true %>
-    <%= form.label :start_datetime, style: "display: block" %>
-    <%= form.text_field :start_datetime, style: "display: block", value: params[:start_datetime], readonly: true %>
-    <%= form.label :flight_time, style: "display: block" %>
-    <%= form.text_field :flight_time, style: "display: block", value: params[:flight_time], readonly: true %>
-    <%= form.label :flight_id, style: "display: block" %>
-    <%= form.text_field :flight_id, style: "display: block", value: params[:flight_id], readonly: true %>
-    <%= form.number_field :tickets, style: "display: block", value: params[:tickets], type: :hidden %>
-
+    
+    <%= params[:departure_airport] %>
+    
+    <%= params[:arrival_airport] %>
+    
+    <%= params[:start_datetime] %>
+    
+    <%= params[:flight_time] %>
+   
+    
     <br>
-    <% @passengers.each_with_index do |passenger, index|%>
-      <%= form.fields_for :passengers, passenger  do |passenger_form| %>
-        <h4>Passenger <%= index + 1 %></h4>
+    <%= form_with model: @booking, url: bookings_path do |f| %>
+      <%= f.hidden_field :flight_id, value: params[:flight_id] %>
 
-        <%= passenger_form.label :name, "Full name:" %>
-        <%= passenger_form.text_field :name %>
+      <%= f.fields_for :passengers do |form| %>
+        <h4>Passenger <%= form.index + 1 %></h4>
 
-        <%= passenger_form.label :email, "Email:" %>
-        <%= passenger_form.email_field :email %>
+        <%= form.label :name, "Full name:" %>
+        <%= form.text_field :name %>
+
+        <%= form.label :email, "Email:" %>
+        <%= form.email_field :email %>
       <% end %>
+
+      <%= f.submit "Confirm details"%>
     <% end %>
     <br>
-    <%= form.submit %>
   </div>
-<% end %>
+

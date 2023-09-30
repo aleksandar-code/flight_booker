@@ -8,17 +8,20 @@ class BookingsController < ApplicationController
 
   # GET /bookings/1 or /bookings/1.json
   def show
+    @booking = Booking.all.find(params[:id])
+    @flight = Flight.all.find(@booking.flight_id)
+    @departure_airport = Airport.all.find(@flight.departure_airport)
+    @arrival_airport = Airport.all.find(@flight.arrival_airport)
   end
 
   # GET /bookings/new
   def new
     @booking = Booking.new
-    @passengers = []
-    if params[:tickets].to_i > 1
-      params[:tickets].to_i.times do 
-        @passengers.push(Passenger.new)
-      end
+    
+    params[:tickets].to_i.times do 
+      @booking.passengers.build
     end
+    
   end
 
   # GET /bookings/1/edit
@@ -27,14 +30,6 @@ class BookingsController < ApplicationController
 
   # POST /bookings or /bookings.json
   def create
-    @passengers = []
-    if params[:tickets].to_i > 1
-      params[:tickets].to_i.times do 
-        @passengers.push(Passenger.new)
-      end
-    end
-    p @passengers
-    p [booking_params, params]
     @booking = Booking.new(booking_params)
 
     respond_to do |format|
@@ -79,6 +74,7 @@ class BookingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def booking_params
-      params.require(:booking).permit(:tickets, :flight_id, :flight_time, :start_datetime, :arrival_airport, :departure_airport, :passengers => [:name, :email, :created_at, :updated_at])
-    end
+      params.require(:booking).permit(:flight_id, 
+        :passengers_attributes => [:name, :email, :passenger_id, :created_at, :updated_at])
+      end
 end

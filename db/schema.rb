@@ -18,13 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_29_160446) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.integer "tickets"
     t.integer "flight_id"
-    t.string "flight_time"
-    t.string "start_datetime"
-    t.integer "arrival_airport"
-    t.integer "departure_airport"
-    t.string "passengers"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -41,6 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_29_160446) do
   create_table "passengers", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.integer "booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
