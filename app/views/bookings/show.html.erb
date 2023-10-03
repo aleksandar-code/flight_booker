@@ -11,8 +11,8 @@
   <p>Flight ID: <%= @flight.id %></p>
   <p>Airport ID: <%= @departure_airport.id %></p>
   <p>-------------------------------------------------------</p>
-  <% @booking.passengers.each do |passenger| %>
-    <p>Passenger <%= passenger.id %></p>
+  <% @booking.passengers.each_with_index do |passenger, index| %>
+    <p>Passenger <%= index + 1%></p>
     <p>Name: <%= passenger.name %></p>
     <p>Email: <%= passenger.email %></p>
   <%end%>
@@ -22,6 +22,5 @@
 
   <%= link_to "Edit this booking", edit_booking_path(@booking) %> |
   <%= link_to "Back to bookings", bookings_path %>
-
   <%= button_to "Destroy this booking", @booking, method: :delete %>
 </div>
